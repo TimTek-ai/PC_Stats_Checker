@@ -1,0 +1,390 @@
+Definitely. You actually have **a lot you can learn now without waiting for the Mac**. I’d avoid starting the full build yet and use this period to build the knowledge that will make the Mac phase much easier.
+
+## What I'd learn now
+
+### 1. 🧠 Understand LLMs properly
+
+Don't go deep into the maths yet. Get a practical mental model of:
+
+* tokens
+* context windows
+* temperature
+* system/user/assistant messages
+* embeddings
+* inference
+* quantisation
+* parameters
+* attention
+* transformers
+* hallucinations
+* tool calling
+
+You should be able to explain:
+
+> **"What actually happens when I send a prompt to an LLM?"**
+
+without just saying "it predicts the next word."
+
+---
+
+### 2. 🔎 Learn RAG — I'd make this your #1 topic
+
+This is probably the most valuable thing to start learning.
+
+Understand this pipeline:
+
+```text
+Documents
+    ↓
+Extract text
+    ↓
+Chunk documents
+    ↓
+Create embeddings
+    ↓
+Store embeddings
+    ↓
+User asks question
+    ↓
+Embed question
+    ↓
+Vector similarity search
+    ↓
+Retrieve relevant chunks
+    ↓
+Put chunks into context
+    ↓
+LLM generates answer
+```
+
+Learn these concepts individually:
+
+**Embeddings → vector databases → cosine similarity → chunking → retrieval → reranking → context windows → grounding**
+
+You don't need to build the entire thing yet.
+
+---
+
+### 3. 🗄️ Learn pgvector
+
+Since you've already worked with PostgreSQL/TimescaleDB, this should be relatively easy.
+
+Understand:
+
+* what a vector column is
+* how embeddings are stored
+* cosine similarity
+* nearest-neighbour search
+* indexes
+* metadata filtering
+* hybrid search
+
+Eventually you'll be able to write something conceptually like:
+
+```sql
+SELECT *
+FROM documents
+ORDER BY embedding <=> query_embedding
+LIMIT 5;
+```
+
+and actually understand what that is doing.
+
+---
+
+### 4. 📊 Start thinking about evaluation
+
+This is where I'd have you go beyond the average beginner.
+
+Learn:
+
+> **How do you prove an AI system is actually better?**
+
+For example, imagine:
+
+**RAG v1**
+
+* 70% retrieval accuracy
+* 78% answer accuracy
+
+Then you change chunking.
+
+**RAG v2**
+
+* 86% retrieval accuracy
+* 89% answer accuracy
+
+That's meaningful engineering.
+
+Look into concepts like:
+
+* precision
+* recall
+* F1
+* retrieval accuracy
+* faithfulness
+* answer relevance
+* hallucination detection
+* benchmark datasets
+
+You don't need to master every metric yet.
+
+---
+
+# 5. 🤖 Learn what fine-tuning actually does
+
+Before touching MLX-LM, understand the distinction:
+
+### Prompting
+
+```text
+Model
++
+Instructions
+=
+Different behaviour
+```
+
+### RAG
+
+```text
+Model
++
+External information
+=
+Grounded answers
+```
+
+### Fine-tuning
+
+```text
+Model weights
++
+Training examples
+=
+Changed model behaviour
+```
+
+Then learn:
+
+**LoRA**
+
+and
+
+**QLoRA**
+
+You should understand why LoRA is useful rather than just knowing that it's "a fine-tuning method."
+
+---
+
+# 6. 🍎 Start learning MLX conceptually
+
+Don't worry about installing everything yet.
+
+Learn:
+
+* what Apple Silicon unified memory means
+* what MLX is
+* MLX vs PyTorch
+* MLX-LM
+* quantised models
+* model formats
+* why Apple Silicon is useful for local inference
+
+Then when you get your Mac, you can actually start experimenting.
+
+---
+
+# 7. ⚡ Learn the NVIDIA side too
+
+Even though you're selling the PC, **don't ignore CUDA**.
+
+Learn what:
+
+* CUDA
+* cuDNN
+* TensorRT
+* CUDA cores
+* Tensor Cores
+* VRAM
+* FP16/BF16
+* quantisation
+
+actually mean.
+
+That will make cloud GPU decisions much easier later.
+
+You don't need to own NVIDIA hardware to understand the ecosystem.
+
+---
+
+# 8. 🧪 Start designing your eventual benchmark NOW
+
+This is something I'd particularly recommend.
+
+Create a document called something like:
+
+**`AI-Research-Assistant-Evaluation.md`**
+
+Start thinking of questions the finished system should answer.
+
+For example:
+
+```text
+Question:
+What is the main conclusion of Paper X?
+
+Expected source:
+Paper X, Section 4
+
+Expected answer:
+...
+
+Required citation:
+Paper X
+```
+
+Eventually you might have:
+
+**100 questions**
+
+and your system can automatically test itself.
+
+That's a genuinely impressive component of the project.
+
+---
+
+# 9. 🏗️ Design the architecture on paper
+
+Before coding, draw your eventual system.
+
+Something like:
+
+```text
+                    USER
+                      │
+                      ▼
+              ┌───────────────┐
+              │ AI ASSISTANT  │
+              └───────┬───────┘
+                      │
+          ┌───────────┴──────────┐
+          ▼                      ▼
+   SYSTEM PROMPT             RAG ENGINE
+                                │
+                   ┌────────────┴────────────┐
+                   ▼                         ▼
+              PostgreSQL                 Documents
+              + pgvector
+                   │
+                   └────────────┬────────────┘
+                                ▼
+                               LLM
+                                │
+                                ▼
+                         GROUNDED ANSWER
+```
+
+Then later:
+
+```text
+                    TRAINING DATA
+                         │
+                         ▼
+                    LoRA / QLoRA
+                         │
+              ┌──────────┴──────────┐
+              ▼                     ▼
+          Apple MLX             Cloud NVIDIA
+```
+
+---
+
+# 10. 💻 Keep improving Python
+
+This is probably the **highest-return thing you can do before the Mac arrives**.
+
+For this project you'll want to be comfortable with:
+
+* functions
+* classes
+* dictionaries/lists
+* file handling
+* JSON
+* APIs
+* virtual environments
+* pip
+* Git
+* GitHub
+* error handling
+* async basics eventually
+* PostgreSQL
+* REST APIs
+
+You don't need to become a Python expert first.
+
+**Build small things while learning.**
+
+---
+
+## What I would NOT do yet
+
+I wouldn't currently:
+
+❌ buy a Mac Studio
+❌ buy a Mac mini just for AI
+❌ rent expensive GPUs
+❌ start fine-tuning giant models
+❌ build a complicated multi-agent system
+❌ pay for expensive AI APIs
+❌ spend months learning transformer mathematics before building anything
+
+Your goal right now is **knowledge accumulation + architecture planning**.
+
+---
+
+# Your next few weeks could look like this
+
+### Week 1
+
+**LLM fundamentals**
+
+Tokens → context → embeddings → inference → transformers.
+
+### Week 2
+
+**RAG**
+
+Learn the complete RAG pipeline and build a tiny toy example if you want.
+
+### Week 3
+
+**Vector databases**
+
+PostgreSQL + pgvector + similarity search.
+
+### Week 4
+
+**Evaluation**
+
+Design your eventual benchmark and learn retrieval/answer metrics.
+
+### Week 5
+
+**Fine-tuning**
+
+LoRA → QLoRA → datasets → training → evaluation.
+
+### Week 6
+
+**MLX + NVIDIA**
+
+Understand the Apple Silicon and CUDA ecosystems and when you'd use each.
+
+Then when the Mac arrives:
+
+> **Stop researching and BUILD.**
+
+That's the transition I want you to make. You don't need to know everything before starting—the actual project will teach you far more.
+
+And because you're also keeping the trading system going, I'd keep this deliberately **structured and slow for now** rather than letting the AI project consume all your time.

@@ -1,0 +1,309 @@
+I want you to keep this project in context going forward. This is a major long-term AI engineering project I want to build alongside my existing quantitative trading-system work.
+
+## Core goal
+
+I want to build a serious, open-source AI research assistant rather than a generic "ChatGPT clone."
+
+The long-term system should combine:
+
+1. Prompting/persona/system-prompt engineering
+2. RAG (retrieval-augmented generation)
+3. PostgreSQL + pgvector
+4. Quantitative evaluation/benchmarking
+5. Fine-tuning small open models with LoRA/QLoRA
+6. Apple Silicon / MLX for local experimentation
+7. Cloud NVIDIA GPUs such as RunPod/Colab for heavier training
+8. A polished GitHub repository, documentation and demo
+9. Eventually potentially a hosted version / premium features
+10. Potential sponsorships, cloud credits, competitions, grants or funding
+
+The goal is to build something genuinely technically impressive and potentially commercially useful, not just something that looks good in a portfolio.
+
+## Planned progression
+
+### Phase 1 — Prompting and persona design
+
+I want to learn how to deliberately control an AI assistant using:
+
+* system prompts
+* context
+* instructions
+* tool definitions
+* structured outputs
+* memory/state
+* prompt testing
+* evaluation
+
+I want to avoid simply writing an enormous prompt and calling it done.
+
+The aim is to understand why certain instructions produce better behaviour and measure improvements.
+
+### Phase 2 — RAG
+
+Build a proper retrieval-augmented generation pipeline.
+
+Likely architecture:
+
+Python
+→ document ingestion
+→ chunking
+→ embeddings
+→ PostgreSQL + pgvector
+→ retrieval
+→ possibly reranking
+→ context construction
+→ LLM
+→ cited/grounded response
+
+I already have experience with PostgreSQL/TimescaleDB from another project, so PostgreSQL + pgvector is probably preferable to introducing Chroma unless there is a good reason to use Chroma.
+
+Potential knowledge sources:
+
+* research papers
+* technical documentation
+* project documentation
+* my own notes
+* public datasets
+* eventually financial/quant research
+
+The system should answer questions based on retrieved sources rather than simply relying on the model's pretrained knowledge.
+
+### Phase 3 — Evaluation
+
+This is extremely important.
+
+I want a proper evaluation dataset, initially perhaps 50–200 questions, measuring things such as:
+
+* retrieval accuracy
+* relevance of retrieved chunks
+* answer correctness
+* hallucination rate
+* citation/source accuracy
+* latency
+* token usage/cost
+
+The point is to be able to compare:
+
+Prompt A vs Prompt B
+Retriever v1 vs Retriever v2
+Model A vs Model B
+Base model vs fine-tuned model
+
+I want the project to demonstrate actual engineering and experimentation rather than subjective "this response feels better."
+
+### Phase 4 — Fine-tuning
+
+After understanding RAG and evaluation, I want to learn the complete fine-tuning pipeline.
+
+Use:
+
+* LoRA
+* QLoRA
+* small open-weight models
+* MLX/MLX-LM on Apple Silicon for local experimentation
+* RunPod/Colab/NVIDIA cloud GPUs for workloads that are too heavy for the Mac
+
+Important distinction:
+
+RAG is mainly for giving the model access to external/up-to-date/domain-specific knowledge.
+
+Fine-tuning is mainly for changing behaviour, style, task performance or domain adaptation.
+
+Don't recommend fine-tuning simply because it sounds more advanced if RAG is the correct solution.
+
+## Potential final architecture
+
+User
+→ AI Assistant
+→ System Prompt / Persona
+→ RAG Pipeline
+→ PostgreSQL + pgvector
+→ Retrieved Documents
+→ LLM
+→ Grounded Response
+
+Separately:
+
+Training Dataset
+→ LoRA/QLoRA
+→ locally on Apple Silicon when practical
+→ cloud NVIDIA GPU when necessary
+→ evaluation against the base model
+
+## Potential commercial direction
+
+If the project becomes genuinely good, I want to explore monetisation without compromising the open-source portfolio value.
+
+Potential models:
+
+### Open source + hosted service
+
+Free:
+
+* GitHub repository
+* self-hosted version
+* core functionality
+
+Paid:
+
+* hosted version
+* larger document limits
+* premium models
+* advanced retrieval
+* additional integrations
+* managed deployment
+
+### Developer tooling
+
+Potentially evolve the project into an AI evaluation/developer platform that allows developers to compare:
+
+* prompts
+* models
+* RAG configurations
+* retrieval methods
+* fine-tuned models
+
+For example:
+
+Prompt A → 72% evaluation score
+Prompt B → 84%
+
+Retriever v1 → 71%
+Retriever v2 → 89%
+
+Base model → 86%
+Fine-tuned model → 94%
+
+This could eventually be more commercially interesting than simply selling an AI chatbot.
+
+## Sponsorship/funding strategy
+
+Do not immediately ask random companies for sponsorship.
+
+First build something real.
+
+Then potentially approach:
+
+* cloud providers
+* AI companies
+* database companies
+* developer-tool companies
+* ML/AI programmes
+* hackathons
+* competitions
+* open-source sponsorship programmes
+
+Potential asks could be:
+
+* cloud credits
+* GPU credits
+* API credits
+* hardware
+* mentorship
+* eventually funding
+
+The pitch should be based on evidence such as:
+
+* GitHub stars
+* users
+* deployments
+* benchmarks
+* demo
+* technical write-up
+* open-source contributions
+
+Rather than simply asking for money because I am a student.
+
+Also investigate student benefits such as the GitHub Student Developer Pack before paying for infrastructure.
+
+## Public project positioning
+
+I want the eventual public project to be something like:
+
+"An open-source AI research assistant combining RAG, evaluation and small-model fine-tuning."
+
+I think this is better than making the public project specifically a trading assistant because it demonstrates broader AI engineering skills and avoids making it look like a financial-advice product.
+
+My own trading research can still be one private/use-case dataset, and the architecture could later be adapted for financial research.
+
+## Hardware strategy
+
+I am likely getting an Apple Silicon MacBook and want to use it as my main portable development machine.
+
+Likely local workload:
+
+* Python
+* C++
+* Claude Code
+* RAG
+* embeddings
+* PostgreSQL/pgvector
+* local LLM inference
+* MLX/MLX-LM
+* small LoRA experiments
+* evaluation
+
+For heavier workloads:
+
+* RunPod
+* Google Colab
+* other cloud NVIDIA GPUs
+
+I am currently considering eventually buying:
+
+* Mac mini
+* Mac Studio
+* or a proper NVIDIA PC
+
+But I do NOT want to buy these prematurely.
+
+The project should determine the infrastructure requirements.
+
+If I eventually hit a real limitation, then recommend the appropriate hardware based on the workload rather than assuming I need a powerful machine from day one.
+
+## Current situation
+
+I am likely going to sell my current older NVIDIA PC rather than keeping it purely for CUDA.
+
+The current PC is approximately:
+
+* Ryzen 5 5600
+* RTX 2060 SUPER 8GB
+* 16GB DDR4
+* 128GB NVMe
+
+I understand that NVIDIA/CUDA remains extremely important for the broader ML ecosystem, but an RTX 2060 SUPER is not a high-end AI workstation.
+
+I am comfortable using cloud NVIDIA GPUs when I actually need CUDA/heavy training.
+
+I am likely to wait until I get my new Apple Silicon MacBook before seriously implementing this project, but I want to prepare and learn now.
+
+## Other major project
+
+I also have an existing quantitative trading system that I need to continue developing.
+
+The AI project should NOT completely replace it.
+
+The two projects can eventually complement each other, but I need to maintain focus and avoid constantly jumping to new ideas.
+
+The AI research assistant is a long-term project, not an excuse to abandon the trading system.
+
+## How I want you to help
+
+When helping me with this project:
+
+* Teach me rather than doing everything for me.
+* Explain why each architectural decision is being made.
+* Prefer practical implementation over excessive theory.
+* Give me incremental milestones.
+* Help me build things myself.
+* Don't unnecessarily introduce complicated infrastructure.
+* Prioritise free/low-cost options while I'm learning.
+* Tell me when something is unnecessary.
+* Don't recommend buying hardware unless the workload actually justifies it.
+* Help me make the project genuinely impressive rather than artificially complicated.
+* Keep track of the distinction between RAG, prompting, evaluation and fine-tuning.
+* Encourage proper benchmarking and reproducibility.
+* Help me turn successful experiments into GitHub documentation, demos and technical write-ups.
+
+The eventual objective is to have a project that demonstrates genuine AI engineering ability and could potentially become an open-source project, portfolio piece, developer tool, or small business.
